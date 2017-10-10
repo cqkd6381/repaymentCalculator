@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>还款计算器</title>
+</head>
+<body>
+<h1>还款计算器</h1>
+<hr>
+</body>
+<script type="text/javascript">
+	//京东贷款计算器（完成）
+	function JDCalcilator(month = 6, money = 1200){
+		var total = 0;
+		var rate = 0.05;
+		var date = new Date;
+		var mm = date.getMonth();
+		console.log('借钱的月份是：' + (mm + 1) + '月份');
+		for (var i = 0; i <= month - 1; i++) {
+			if(mm + i + 1 > 12){
+				var computeMonth = (mm + i + 1) % 12;
+				var computeYear = date.getFullYear() + 1;
+			}else{
+				var computeMonth = mm + i + 1;
+				var computeYear = date.getFullYear();
+			}
+			var payMonth = (mm + i + 2) > 12 ? (mm + i + 2) % 12 : mm + i + 2;
+			console.log(computeYear);console.log(computeMonth);
+			var monthDays = getMonthDays(computeYear, computeMonth);
+			if(i == 0){
+				var perMonth = (money - (money / month) * i) * (monthDays + 1) * rate / 100 + money / month;
+			}else{
+				var perMonth = (money - (money / month) * i) * monthDays * rate / 100 + money / month;
+			}
+			console.log(monthDays);
+			console.log('第' +  (i + 1) + '次还款时间为：' + payMonth + '月份');
+			console.log('第' +  (i + 1) + '次还款额为：' + perMonth);
+			total += perMonth;
+		}
+		console.log('总还款额为：' + total);
+	}
+	//支付宝贷款计算器（未完成）
+	function AliPayCalcilator(month = 12, money = 1200){
+		var total = 0;
+		var rate = 0.04;
+		var date = new Date;
+		var mm = date.getMonth();
+		console.log('借钱的月份是：' + (mm + 1) + '月份');
+		for (var i = 0; i <= month - 1; i++) {
+			if(mm + i + 1 > 12){
+				var computeMonth = (mm + i + 1) % 12;
+				var computeYear = date.getFullYear() + 1;
+			}else{
+				var computeMonth = mm + i + 1;
+				var computeYear = date.getFullYear();
+			}
+			var payMonth = (mm + i + 2) > 12 ? (mm + i + 2) % 12 : mm + i + 2;
+			console.log(computeYear);console.log(computeMonth);
+			var monthDays = getMonthDays(computeYear, computeMonth);
+			if(i == 0){
+				var perMonth = (money - (money / month) * i) * (monthDays + 1) * rate / 100 + money / month;
+			}else{
+				var perMonth = (money - (money / month) * i) * monthDays * rate / 100 + money / month;
+			}
+			console.log(monthDays);
+			console.log('第' +  (i + 1) + '次还款时间为：' + payMonth + '月份');
+			console.log('第' +  (i + 1) + '次还款额为：' + perMonth);
+			total += perMonth;
+		}
+		console.log('总还款额为：' + total);
+	}
+
+	function getMonthDays(computeYear, computeMonth){
+		return new Date(computeYear, computeMonth, 0).getDate();
+	}
+
+	JDCalcilator();
+	// AliPayCalcilator();
+</script>
+</html>
